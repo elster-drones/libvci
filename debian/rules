@@ -3,4 +3,5 @@ export GOPATH=/usr/share/gocode
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 
 %:
+	go env -w GO111MODULE=off
 	dh $@ --with python3
