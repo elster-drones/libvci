@@ -3,7 +3,7 @@ Section: contrib/net
 Priority: optional
 Maintainer: Vyatta Package Maintainers <DL-vyatta-help@att.com>
 Build-depends:
- debhelper (>= 9),
+ debhelper (>= 12),
  dh-exec,
  dh-python,
  golang-github-danos-mgmterror-dev,
@@ -36,11 +36,11 @@ Architecture: any
 Depends:
  libvci1 (= ${binary:Version}),
  ${misc:Depends},
- ${python3:Depends},
  ${shlibs:Depends}
 X-Python3-Version: >= 3.2
 Description: Python 3 bindings to Vyatta Component Infrastructure library
  Python 3 wrapper for Vyatta Component Infrastructure API
+# ${python3:Depends},
 
 Package: libvci-perl
 Section: contrib/perl
