@@ -5,6 +5,7 @@
 
 #ifndef __VCI_HPP__
 #define __VCI_HPP__
+#include <cstdint>
 #include <string>
 #include <map>
 #include <functional>
