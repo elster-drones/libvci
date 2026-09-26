@@ -9,6 +9,7 @@ Build-depends:
  golang-github-danos-mgmterror-dev,
  golang-github-danos-vci-dev,
  golang-go,
+ libcrypt-dev,
  pkg-config,
  python3-dev,
  swig (>= 3.0)

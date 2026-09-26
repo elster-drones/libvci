@@ -34,7 +34,7 @@ private:
 long py_callable_num_args(PyObject *obj) {
 	OwnedPyObject code = PyObject_GetAttrString(obj, "__code__");
 	OwnedPyObject argcount = PyObject_GetAttrString(code.get(), "co_argcount");
-	return PyInt_AsLong(argcount.get());
+	return PyLong_AsLong(argcount.get());
 }
 
 int py_object_is_rpc_method(PyObject *obj) {
@@ -62,7 +62,7 @@ PyObject *py_decode_object(const std::string &encoded_input) {
 	PyObject* main = PyImport_AddModule("__main__");//Borrowed ref
 	PyObject* globals = PyModule_GetDict(main); //Borrowed ref
 	OwnedPyObject locals = PyDict_New();
-	OwnedPyObject value = PyString_FromString(encoded_input.c_str());
+	OwnedPyObject value = PyUnicode_FromString(encoded_input.c_str());
 	PyDict_SetItemString(locals.get(), "encoded_data", value.get());
 
 	OwnedPyObject impret = PyRun_String(
