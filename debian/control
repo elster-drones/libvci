@@ -37,11 +37,11 @@ Architecture: any
 Depends:
  libvci1 (= ${binary:Version}),
  ${misc:Depends},
+ ${python3:Depends},
  ${shlibs:Depends}
 X-Python3-Version: >= 3.2
 Description: Python 3 bindings to Vyatta Component Infrastructure library
  Python 3 wrapper for Vyatta Component Infrastructure API
-# ${python3:Depends},
 
 Package: libvci-perl
 Section: contrib/perl
