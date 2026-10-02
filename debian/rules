@@ -8,3 +8,8 @@ export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 
 # dwz cannot read the DWARF 5 that Go >= 1.25 emits for the cgo-built libvci.so
 override_dh_dwz:
+
+# Load both native bindings to detect missing runtime library dependencies.
+override_dh_auto_test:
+	LD_LIBRARY_PATH=$(CURDIR) PERL5LIB=$(CURDIR)/swig/perl5 perl -Mvci -e 'print "Perl VCI binding loaded\n"'
+	LD_LIBRARY_PATH=$(CURDIR) PYTHONPATH=$(CURDIR)/swig/python3 python3 -c 'import vci; print("Python VCI binding loaded")'

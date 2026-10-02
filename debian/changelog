@@ -1,3 +1,11 @@
+libvci (1.11) unstable; urgency=medium
+
+  * Link the Perl binding against libvci after its object so --as-needed
+    retains the runtime dependency required by QoS commands.
+  * Load the Perl and Python bindings in the package build test gate.
+
+ -- Erik Ziegenbalg <erikziege@gmail.com>  Fri, 02 Oct 2026 05:48:00 +0000
+
 libvci (1.10) unstable; urgency=medium
 
   [ William Ivory ]

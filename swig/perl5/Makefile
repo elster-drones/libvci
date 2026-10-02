@@ -17,7 +17,7 @@ vci_wrap.cxx: vci.i
 	swig -Wall -c++ -perl5 vci.i
 
 $(TARGET): vci_wrap.cxx helpers.hpp ../../vci.hpp
-	g++ $(CPPFLAGS) $(CXXFLAGS) $(shell perl -MExtUtils::Embed -e ccopts) -L../../ -shared -fPIC $(LDFLAGS) -Wl,-soname,$(TARGET) -o $(TARGET) -std=c++11 -lvci vci_wrap.cxx
+	g++ $(CPPFLAGS) $(CXXFLAGS) $(shell perl -MExtUtils::Embed -e ccopts) -L../../ -shared -fPIC $(LDFLAGS) -Wl,-soname,$(TARGET) -o $(TARGET) -std=c++11 vci_wrap.cxx -lvci
 
 
 clean:
