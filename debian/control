@@ -8,7 +8,7 @@ Build-depends:
  dh-python,
  golang-github-danos-mgmterror-dev,
  golang-github-danos-vci-dev,
- golang-go,
+ golang-go:native,
  libcrypt-dev,
  pkg-config,
  python3-dev,
