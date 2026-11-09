@@ -10,6 +10,8 @@ Build-depends:
  golang-github-danos-vci-dev,
  golang-go:native,
  libcrypt-dev,
+ libstdc++-dev,
+ perl-xs-dev,
  pkg-config,
  python3-dev,
  swig (>= 3.0)

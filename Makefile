@@ -30,28 +30,28 @@ $(GO_LIB): $(GO_SOURCES)
 $(GO_HEADER): $(GO_LIB)
 
 %.o: %.c %.h $(GO_HEADER)
-	gcc $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 %.oxx: %.cpp %.hpp %.h $(GO_HEADER)
-	g++ $(CXXFLAGS) $(CPPFLAGS) -c -o $@ $<
+	$(CXX) $(CXXFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 $(TARGET): $(GENERATED_OBJS) $(CPP_GENERATED_OBJS) $(GO_LIB)
-	g++ -shared -fPIC $(LDFLAGS) -Wl,-soname,$@ -o $@ -lpthread $^
+	$(CXX) -shared -fPIC $(LDFLAGS) -Wl,-soname,$@ -o $@ -lpthread $^
 
 $(TARGET_LINK): $(TARGET)
 	ln -s $(TARGET) $(TARGET_LINK)
 
 $(PYTHON3_LIB): $(TARGET_LINK) vci.hpp vci.h
-	make -C swig/python3
+	$(MAKE) -C swig/python3
 
 $(PERL5_LIB): $(TARGET_LINK) vci.hpp vci.h
-	make -C swig/perl5
+	$(MAKE) -C swig/perl5
 
 examples/c/vci-c-example: examples/c/main.c vci.h $(TARGET_LINK)
-	gcc -L. -I. -std=gnu11 -o $@ $< -lvci
+	$(CC) -L. -I. -std=gnu11 -o $@ $< -lvci
 
 examples/c++/vci-c++-example: examples/c++/main.cpp vci.hpp vci.h $(TARGET_LINK)
-	g++ -L. -I. -std=c++11 -o $@ $< -lvci
+	$(CXX) -L. -I. -std=c++11 -o $@ $< -lvci
 
 examples/go/vci-go-example: examples/go/main.go
 	go build -o $@ $<
@@ -69,7 +69,7 @@ vci.pc:
 	echo 'Cflags: -I$${includedir}' >> $@
 
 clean:
-	make -C swig/python3 clean
+	$(MAKE) -C swig/python3 clean
 	rm -f $(GENERATED_OBJS)
 	rm -f $(CPP_GENERATED_OBJS)
 	rm -f $(GO_LIB)

@@ -2,6 +2,11 @@
 export GOPATH=/usr/share/gocode
 export DEB_BUILD_MAINT_OPTIONS = hardening=+all
 
+include /usr/share/dpkg/default.mk
+ifneq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
+export PERL := perl -I$(shell perl -MDebian::Debhelper::Dh_Lib=perl_cross_incdir -e 'print perl_cross_incdir()')
+endif
+
 %:
 	go env -w GO111MODULE=off
 	dh $@ --with python3
@@ -11,5 +16,7 @@ override_dh_dwz:
 
 # Load both native bindings to detect missing runtime library dependencies.
 override_dh_auto_test:
+ifeq ($(DEB_BUILD_GNU_TYPE),$(DEB_HOST_GNU_TYPE))
 	LD_LIBRARY_PATH=$(CURDIR) PERL5LIB=$(CURDIR)/swig/perl5 perl -Mvci -e 'print "Perl VCI binding loaded\n"'
 	LD_LIBRARY_PATH=$(CURDIR) PYTHONPATH=$(CURDIR)/swig/python3 python3 -c 'import vci; print("Python VCI binding loaded")'
+endif
